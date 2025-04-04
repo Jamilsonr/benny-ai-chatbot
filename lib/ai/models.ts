@@ -17,7 +17,7 @@ export const chatModels: Array<ChatModel> = [
     name: 'Reasoning model',
     description: 'Uses advanced reasoning',
   },
-    {
+  {
     id: 'deepseek-model',
     name: 'Deepseek',
     description: 'Modelo Deepseek da Vercel AI SDK',
