@@ -25,13 +25,13 @@ export const myProvider = isTestEnvironment
     })
   : customProvider({
       languageModels: {
-        'chat-model': deepseek('deepseek-chat', { apiKey: 'sk-2e279662581b49da98fb09e3cb5b7ac6' }),
+        'chat-model': deepseek('deepseek-chat', { apiKey: process.env.DEEPSEEK_API_KEY }),
         'chat-model-reasoning': wrapLanguageModel({
-          model: deepseek('deepseek-chat', { apiKey: 'sk-2e279662581b49da98fb09e3cb5b7ac6' }),
+          model: deepseek('deepseek-chat', { apiKey: process.env.DEEPSEEK_API_KEY }),
           middleware: extractReasoningMiddleware({ tagName: 'think' }),
         }),
-        'title-model': deepseek('deepseek-chat', { apiKey: 'sk-2e279662581b49da98fb09e3cb5b7ac6' }),
-        'artifact-model': deepseek('deepseek-chat', { apiKey: 'sk-2e279662581b49da98fb09e3cb5b7ac6' }),
+        'title-model': deepseek('deepseek-chat', { apiKey: process.env.DEEPSEEK_API_KEY }),
+        'artifact-model': deepseek('deepseek-chat', { apiKey: process.env.DEEPSEEK_API_KEY }),
       },
       imageModels: {
         'small-model': xai.image('grok-2-image'),
