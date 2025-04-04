@@ -27,9 +27,10 @@ export const myProvider = isTestEnvironment
       languageModels: {
         'chat-model': xai('grok-2-1212'),
         'chat-model-reasoning': wrapLanguageModel({
-          model: groq('deepseek-r1-distill-llama-70b'),
+          model: deepseek('deepseek-v3'),
           middleware: extractReasoningMiddleware({ tagName: 'think' }),
         }),
+        'deepseek-model': deepseek('deepseek-v3'),
         'title-model': xai('grok-2-1212'),
         'artifact-model': xai('grok-2-1212'),
       },
