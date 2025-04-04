@@ -3,6 +3,7 @@ import {
   extractReasoningMiddleware,
   wrapLanguageModel,
 } from 'ai';
+import { deepseek } from '@ai-sdk/deepseek';
 import { groq } from '@ai-sdk/groq';
 import { xai } from '@ai-sdk/xai';
 import { isTestEnvironment } from '../constants';
