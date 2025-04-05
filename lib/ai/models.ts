@@ -1,4 +1,4 @@
-export const DEFAULT_CHAT_MODEL: string = 'chat-model';
+export const DEFAULT_CHAT_MODEL: string = 'deepseek-model';
 
 interface ChatModel {
   id: string;
@@ -8,18 +8,8 @@ interface ChatModel {
 
 export const chatModels: Array<ChatModel> = [
   {
-    id: 'chat-model',
-    name: 'Chat model',
-    description: 'Primary model for all-purpose chat',
-  },
-  {
-    id: 'chat-model-reasoning',
-    name: 'Reasoning model',
-    description: 'Uses advanced reasoning',
-  },
-  {
     id: 'deepseek-model',
-    name: 'Deepseek',
+    name: 'Deepseek R1',
     description: 'Modelo Deepseek da Vercel AI SDK',
   },
 ];
