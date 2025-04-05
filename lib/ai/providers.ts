@@ -25,14 +25,14 @@ export const myProvider = isTestEnvironment
     })
   : customProvider({
       languageModels: {
-        'chat-model': xai('grok-2-1212'),
+        'chat-model': deepseek('deepseek-reasoner'),
         'chat-model-reasoning': wrapLanguageModel({
-          model: deepseek('deepseek-v3'),
+          model: deepseek('deepseek-reasoner'),
           middleware: extractReasoningMiddleware({ tagName: 'think' }),
         }),
-        'deepseek-model': deepseek('deepseek-v3'),
-        'title-model': xai('grok-2-1212'),
-        'artifact-model': xai('grok-2-1212'),
+        'deepseek-model': deepseek('deepseek-reasoner'),
+        'title-model': deepseek('deepseek-reasoner'),
+        'artifact-model': deepseek('deepseek-reasoner'),
       },
       imageModels: {
         'small-model': xai.image('grok-2-image'),
