@@ -240,7 +240,7 @@ function PureMultimodalInput({
             event.preventDefault();
 
             if (status !== 'ready') {
-              toast.error('Por favor, aguarde que o Benny termine a sua resposta');
+              toast.error('Por favor, aguarde eu terminar');
             } else {
               submitForm();
             }
