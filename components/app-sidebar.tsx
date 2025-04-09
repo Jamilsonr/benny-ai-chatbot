@@ -34,7 +34,7 @@ export function AppSidebar({ user }: { user: User | undefined }) {
               }}
               className="flex flex-row gap-3 items-center"
             >
-              <span className="text-lg font-semibold px-2 hover:bg-muted rounded-md cursor-pointer">
+              <span className="text-primary font-semibold px-2 hover:bg-muted rounded-md cursor-pointer">
                 Benny
               </span>
             </Link>
@@ -53,7 +53,7 @@ export function AppSidebar({ user }: { user: User | undefined }) {
                   <PlusIcon />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent align="end">New Chat</TooltipContent>
+              <TooltipContent align="end">Novo Chat</TooltipContent>
             </Tooltip>
           </div>
         </SidebarMenu>
