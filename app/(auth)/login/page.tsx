@@ -60,7 +60,7 @@ export default function Page() {
             {"Não tem uma conta? "}
             <Link
               href="/register"
-              className="font-semibold text-gray-800 hover:underline dark:text-zinc-200"
+              className="font-semibold text-link hover:text-link-hover hover:underline dark:text-link"
             >
               Inscreva-se
             </Link>

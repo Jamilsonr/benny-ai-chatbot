@@ -33,11 +33,15 @@ const config: Config = {
           foreground: 'hsl(var(--popover-foreground))',
         },
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
+          DEFAULT: '#E5231B',
           foreground: 'hsl(var(--primary-foreground))',
         },
+        link: {
+          DEFAULT: '#E5231B',
+          hover: '#C41D17',
+        },
         secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
+          DEFAULT: '#E5231B',
           foreground: 'hsl(var(--secondary-foreground))',
         },
         muted: {
