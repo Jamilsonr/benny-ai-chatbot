@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://chat.vercel.ai'),
   title: 'Benny',
   description: 'Benny AI.',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export const viewport = {
