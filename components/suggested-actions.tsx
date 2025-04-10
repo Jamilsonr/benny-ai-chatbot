@@ -13,24 +13,24 @@ interface SuggestedActionsProps {
 function PureSuggestedActions({ chatId, append }: SuggestedActionsProps) {
   const suggestedActions = [
     {
-      title: 'What are the advantages',
-      label: 'of using Next.js?',
-      action: 'What are the advantages of using Next.js?',
+      title: 'Abrir Conta',
+      label: 'Como posso abrir uma conta no BCN?',
+      action: 'Como posso abrir uma conta no BCN?',
     },
     {
-      title: 'Write code to',
-      label: `demonstrate djikstra's algorithm`,
-      action: `Write code to demonstrate djikstra's algorithm`,
+      title: 'Taxa de Juros',
+      label: 'Qual a taxa de juros para financiamento imobiliário?',
+      action: 'Qual a taxa de juros para financiamento imobiliário no BCN?',
     },
     {
-      title: 'Help me write an essay',
-      label: `about silicon valley`,
-      action: `Help me write an essay about silicon valley`,
+      title: 'Cartão de Crédito',
+      label: 'Quais os benefícios do cartão de crédito BCN?',
+      action: 'Quais os benefícios do cartão de crédito BCN?',
     },
     {
-      title: 'What is the weather',
-      label: 'in San Francisco?',
-      action: 'What is the weather in San Francisco?',
+      title: 'Suporte',
+      label: 'Como entrar em contato com o suporte do BCN?',
+      action: 'Como posso entrar em contato com o suporte do BCN?',
     },
   ];
 
