@@ -26,7 +26,7 @@ export const fetcher = async (url: string) => {
 
   if (!res.ok) {
     const error = new Error(
-      'An error occurred while fetching the data.',
+      'Ocorreu um erro ao pesquisar os dados.',
     ) as ApplicationError;
 
     error.info = await res.json();
