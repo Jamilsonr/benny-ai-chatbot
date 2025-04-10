@@ -23,14 +23,14 @@ function PureSuggestedActions({ chatId, append }: SuggestedActionsProps) {
       action: 'Qual a taxa de juros para financiamento imobiliário no BCN?',
     },
     {
-      title: 'Cartão de Crédito',
-      label: 'Quais os benefícios do cartão de crédito BCN?',
-      action: 'Quais os benefícios do cartão de crédito BCN?',
+      title: 'Produtos e Serviços',
+      label: 'Quais produtos e serviços o banco oferece?',
+      action: 'Liste e explique os produtos e serviços oferecidos pelo Banco BCN.',
     },
     {
-      title: 'Suporte',
-      label: 'Como entrar em contato com o suporte do BCN?',
-      action: 'Como posso entrar em contato com o suporte do BCN?',
+      title: 'Investimentos',
+      label: 'Quais opções de investimentos estão disponíveis?',
+      action: 'Detalhe as opções de investimento e produtos financeiros do Banco BCN.',
     },
   ];
 
