@@ -149,7 +149,7 @@ function PureMultimodalInput({
       const { error } = await response.json();
       toast.error(error);
     } catch (error) {
-      toast.error('Failed to upload file, please try again!');
+      toast.error('Falha ao enviar o ficheiro, tente novamente!');
     }
   };
 
@@ -171,7 +171,7 @@ function PureMultimodalInput({
           ...successfullyUploadedAttachments,
         ]);
       } catch (error) {
-        console.error('Error uploading files!', error);
+        console.error('Erro ao carregar ficheiros!', error);
       } finally {
         setUploadQueue([]);
       }
@@ -222,7 +222,7 @@ function PureMultimodalInput({
       <Textarea
         data-testid="multimodal-input"
         ref={textareaRef}
-        placeholder="Send a message..."
+        placeholder="EnviE uma mensagem..."
         value={input}
         onChange={handleInput}
         className={cx(
@@ -240,7 +240,7 @@ function PureMultimodalInput({
             event.preventDefault();
 
             if (status !== 'ready') {
-              toast.error('Por favor, aguarde eu terminar');
+              toast.error('Por favor, aguarde um momento...');
             } else {
               submitForm();
             }
