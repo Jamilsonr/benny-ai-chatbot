@@ -65,7 +65,7 @@ export const createDocument = ({ session, dataStream }: CreateDocumentProps) =>
         ...dbDocuments.map(doc => doc.content ?? "")
       ].join("\n")
 
-      const ragStream = new DataStreamWriter()
+      const ragStream = new DataStreamWriter() as any;
 
       ragStream.on('data', (chunk) => {
         dataStream.write(chunk)
