@@ -1,5 +1,5 @@
 import { generateUUID } from '@/lib/utils';
-import { DataStreamWriter, tool } from 'ai';
+import {  tool } from 'ai';
 import { z } from 'zod';
 import { Session } from 'next-auth';
 import {
@@ -7,11 +7,10 @@ import {
   documentHandlersByArtifactKind,
 } from '@/lib/artifacts/server';
 import { getDocumentsById } from '@/lib/db/queries';
-
 interface CreateDocumentProps {
   session: Session;
-  dataStream: DataStreamWriter;
 }
+
 
 export const createDocument = ({ session, dataStream }: CreateDocumentProps) =>
   tool({
@@ -65,10 +64,9 @@ export const createDocument = ({ session, dataStream }: CreateDocumentProps) =>
         ...dbDocuments.map(doc => doc.content ?? "")
       ].join("\n")
 
-      await documentHandler.onCreateDocument({
-        title,
-        dataStream,
-        session,
+      await documentHandler.onCreateDocument({ 
+        id, 
+        session 
       });
 
       dataStream.writeData({ type: 'finish', content: '' });
