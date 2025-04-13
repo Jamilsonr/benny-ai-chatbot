@@ -68,7 +68,6 @@ export const createDocument = ({ session, dataStream }: CreateDocumentProps) =>
       await documentHandler.onCreateDocument({
         title,
         dataStream,
-        ragStream,
         session,
       });
 
