@@ -46,7 +46,7 @@ export const createDocument = ({ session }: CreateDocumentProps) =>
         ].join('\n');
       }
 
-      await documentHandler.onCreateDocument({ id, session, context });
+      await documentHandler.onCreateDocument({ id, session });
 
       // Return the document details
       return {
