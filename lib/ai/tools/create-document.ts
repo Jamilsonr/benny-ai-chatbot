@@ -11,37 +11,16 @@ interface CreateDocumentProps {
   session: Session;
 }
 
-
-export const createDocument = ({ session, dataStream }: CreateDocumentProps) =>
+export const createDocument = ({ session }: CreateDocumentProps) =>
   tool({
     description:
-      'Create a document for a writing or content creation activities. This tool will call other functions that will generate the contents of the document based on the title and kind.',
+      'Create a document for writing or content creation activities. This tool will call other functions that will generate the contents of the document based on the title and kind.',
     parameters: z.object({
       title: z.string(),
       kind: z.enum(artifactKinds),
     }),
     execute: async ({ title, kind }) => {
       const id = generateUUID();
-
-      dataStream.writeData({
-        type: 'kind',
-        content: kind,
-      });
-
-      dataStream.writeData({
-        type: 'id',
-        content: id,
-      });
-
-      dataStream.writeData({
-        type: 'title',
-        content: title,
-      });
-
-      dataStream.writeData({
-        type: 'clear',
-        content: '',
-      });
 
       const documentHandler = documentHandlersByArtifactKind.find(
         (documentHandlerByArtifactKind) =>
@@ -52,30 +31,29 @@ export const createDocument = ({ session, dataStream }: CreateDocumentProps) =>
         throw new Error(`No document handler found for kind: ${kind}`);
       }
 
-      //RAG implementation
-      const dbDocuments = await getDocumentsById({ id: session.user?.id ?? "" })
+      // RAG implementation
+      let context = '';
+      if (session?.user?.id) {
+        const dbDocuments = await getDocumentsById({ id: session.user.id });
 
-      // Fetch content from the specified website
-      const websiteResponse = await fetch('https://bcn.cv/pt_PT/')
-      const websiteContent = await websiteResponse.text()
+        // Fetch content from the specified website
+        const websiteResponse = await fetch('https://bcn.cv/pt_PT/');
+        const websiteContent = await websiteResponse.text();
 
-      const context = [
-        websiteContent,
-        ...dbDocuments.map(doc => doc.content ?? "")
-      ].join("\n")
+        context = [
+          websiteContent,
+          ...dbDocuments.map((doc) => doc.content ?? ''),
+        ].join('\n');
+      }
 
-      await documentHandler.onCreateDocument({ 
-        id, 
-        session 
-      });
+      await documentHandler.onCreateDocument({ id, session, context });
 
-      dataStream.writeData({ type: 'finish', content: '' });
-
+      // Return the document details
       return {
         id,
         title,
         kind,
-        content: 'A document was created and is now visible to the user.',
+        content: `A document with id: ${id} was created and is now visible to the user.`,
       };
     },
   });
