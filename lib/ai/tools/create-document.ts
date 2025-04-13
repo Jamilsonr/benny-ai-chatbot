@@ -54,7 +54,7 @@ export const createDocument = ({ session, dataStream }: CreateDocumentProps) =>
       }
 
       //RAG implementation
-      const dbDocuments = await getDocumentsById({ userId: session?.user.id! })
+      const dbDocuments = await getDocumentsById({ id: session?.user.id! })
 
       // Fetch content from the specified website
       const websiteResponse = await fetch('https://bcn.cv/pt_PT/')
