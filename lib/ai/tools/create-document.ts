@@ -1,4 +1,4 @@
-import { generateUUID } from '@/lib/utils';
+import { generateUUID, truncateText } from '@/lib/utils';
 import {  tool } from 'ai';
 import { z } from 'zod';
 import { Session } from 'next-auth';
@@ -8,6 +8,8 @@ import {
 } from '@/lib/artifacts/server';
 import { getDocumentsById } from '@/lib/db/queries';
 interface CreateDocumentProps {
+  title: string;
+  kind: z.infer<typeof artifactKinds>;
   session: Session;
 }
 
@@ -20,7 +22,7 @@ export const createDocument = ({ session }: CreateDocumentProps) =>
       kind: z.enum(artifactKinds),
     }),
     execute: async ({ title, kind }) => {
-      const id = generateUUID();
+      const id = generateUUID()
 
       const documentHandler = documentHandlersByArtifactKind.find(
         (documentHandlerByArtifactKind) =>
@@ -28,23 +30,27 @@ export const createDocument = ({ session }: CreateDocumentProps) =>
       );
 
       if (!documentHandler) {
-        throw new Error(`No document handler found for kind: ${kind}`);
+        throw new Error(`No document handler found for kind: ${kind}`)
       }
 
       // RAG implementation
-      let context = '';
+      let context = ""
       if (session?.user?.id) {
         const dbDocuments = await getDocumentsById({ id: session.user.id });
 
         // Fetch content from the specified website
-        const websiteResponse = await fetch('https://bcn.cv/pt_PT/');
-        const websiteContent = await websiteResponse.text();
+        try {
+          const websiteResponse = await fetch('https://bcn.cv/pt_PT/')
+          const websiteContent = await websiteResponse.text()
+          context += `Website Content:\n${truncateText(websiteContent, 10000)}\n\n`
+        } catch (error) {
+          console.error("Error fetching website content:", error);
+        }
 
-        context = [
-          websiteContent,
-          ...dbDocuments.map((doc) => doc.content ?? ''),
-        ].join('\n');
+        const dbContent = dbDocuments.map(doc => truncateText(doc.content ?? "", 5000)).join('\n\n')
+        context += `Database Documents:\n${dbContent}`
       }
+      console.log("RAG Context:", context.length > 0 ? "Available" : "Empty");
 
       await documentHandler.onCreateDocument({ id, session });
 
