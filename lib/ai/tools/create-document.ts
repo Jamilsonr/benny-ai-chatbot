@@ -6,7 +6,7 @@ import {
   artifactKinds,
   documentHandlersByArtifactKind,
 } from '@/lib/artifacts/server';
-import { getDocuments } from '@/lib/db/queries';
+import { getDocumentsById } from '@/lib/db/queries';
 
 interface CreateDocumentProps {
   session: Session;
@@ -54,7 +54,7 @@ export const createDocument = ({ session, dataStream }: CreateDocumentProps) =>
       }
 
       //RAG implementation
-      const dbDocuments = await getDocuments({ userId: session?.user.id! })
+      const dbDocuments = await getDocumentsById({ userId: session?.user.id! })
 
       // Fetch content from the specified website
       const websiteResponse = await fetch('https://bcn.cv/pt_PT/')
