@@ -6,7 +6,7 @@ import {
   artifactKinds,
   documentHandlersByArtifactKind,
 } from '@/lib/artifacts/server';
-import { getDocumentsById } from '@/lib/db/queries';
+
 const Kinds = z.enum(["text", "code", "image", "sheet"]);
 interface CreateDocumentProps {
   title: string;
@@ -34,7 +34,7 @@ export const createDocument = ({ session }: CreateDocumentProps) =>
         throw new Error(`No document handler found for kind: ${kind}`)
       }
 
-      await documentHandler.onCreateDocument({ id, session, title });
+      await documentHandler.onCreateDocument({ id, session, title});
 
       // Return the document details
       return {
