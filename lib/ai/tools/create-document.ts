@@ -34,7 +34,7 @@ export const createDocument = ({ session }: CreateDocumentProps) =>
         throw new Error(`No document handler found for kind: ${kind}`)
       }
 
-      await documentHandler.onCreateDocument({ id, session });
+      await documentHandler.onCreateDocument({ id, session, title });
 
       // Return the document details
       return {
