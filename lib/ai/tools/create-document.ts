@@ -6,6 +6,7 @@ import {
   artifactKinds,
   documentHandlersByArtifactKind,
 } from '@/lib/artifacts/server';
+import { getDocuments } from '@/lib/db/queries';
 
 interface CreateDocumentProps {
   session: Session;
@@ -52,10 +53,29 @@ export const createDocument = ({ session, dataStream }: CreateDocumentProps) =>
         throw new Error(`No document handler found for kind: ${kind}`);
       }
 
+      //RAG implementation
+      const dbDocuments = await getDocuments({ userId: session?.user.id! })
+
+      // Fetch content from the specified website
+      const websiteResponse = await fetch('https://bcn.cv/pt_PT/')
+      const websiteContent = await websiteResponse.text()
+
+      const context = [
+        websiteContent,
+        ...dbDocuments.map(doc => doc.content ?? "")
+      ].join("\n")
+
+      const ragStream = new DataStreamWriter()
+
+      ragStream.on('data', (chunk) => {
+        dataStream.write(chunk)
+      })
+
       await documentHandler.onCreateDocument({
         id,
         title,
         dataStream,
+        ragStream,
         session,
       });
 
