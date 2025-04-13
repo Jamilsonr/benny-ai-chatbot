@@ -1,4 +1,4 @@
-import { generateUUID } from '@/lib/utils';
+import { generateUUID } from "@/lib/utils";
 import {  tool } from 'ai';
 import { z } from 'zod';
 import { Session } from 'next-auth';
@@ -7,10 +7,11 @@ import {
   documentHandlersByArtifactKind,
 } from '@/lib/artifacts/server';
 import { getDocumentsById } from '@/lib/db/queries';
+const Kinds = z.enum(["text", "code", "image", "sheet"]);
 interface CreateDocumentProps {
   title: string;
-  kind: z.infer<typeof artifactKinds>;
-  session: Session;
+  kind: z.infer<typeof Kinds>;
+  session: Session
 }
 
 export const createDocument = ({ session }: CreateDocumentProps) =>
@@ -19,7 +20,7 @@ export const createDocument = ({ session }: CreateDocumentProps) =>
       'Create a document for writing or content creation activities. This tool will call other functions that will generate the contents of the document based on the title and kind.',
     parameters: z.object({
       title: z.string(),
-      kind: z.enum(artifactKinds),
+      kind: Kinds
     }),
     execute: async ({ title, kind }) => {
       const id = generateUUID()
