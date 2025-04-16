@@ -34,9 +34,12 @@ export function AppSidebar({ user }: { user: User | undefined }) {
               }}
               className="flex flex-row gap-3 items-center"
             >
-              <span className="text-primary font-semibold px-2 hover:bg-muted rounded-md cursor-pointer">
-                Benny
-              </span>
+              <span
+              className="text-lg font-semibold px-2 hover:bg-muted rounded-md cursor-pointer"
+              style={{ color: "#E5231B" }}
+            >
+              BENNY
+            </span>
             </Link>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -53,7 +56,7 @@ export function AppSidebar({ user }: { user: User | undefined }) {
                   <PlusIcon />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent align="end">Novo Chat</TooltipContent>
+              <TooltipContent align="end">Nova Conversa</TooltipContent>
             </Tooltip>
           </div>
         </SidebarMenu>
